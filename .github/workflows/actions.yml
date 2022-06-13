@@ -1,0 +1,37 @@
+name: DockerTask_DebianInfo
+
+on:
+  push:
+    branches: [master]
+    
+jobs:
+  
+  Run:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: Build and run container
+        shell: bash
+        run: |
+          docker build -t task .
+          docker run --name TaskCont task
+          
+      - name: Getting info out of container and clear containers and images
+        shell: bash
+        run: |
+          docker cp TaskCont:/task/info.txt .
+          docker rm ContTask
+          docker rmi task
+          docker rmi debian
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: info.txt
+          
+          
