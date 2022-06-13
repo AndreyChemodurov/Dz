@@ -25,9 +25,8 @@ jobs:
         shell: bash
         run: |
           docker cp TaskCont:/task/info.txt .
-          docker rm TaskCont
-          docker rmi task
-          docker rmi debian
+          docker containre prune
+          docker image prune
           
       - name: Upload artifact
         uses: actions/upload-artifact@v3
