@@ -15,6 +15,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         
+      - name: Make artifact dir
+        shell: bash
+        run: mkdir artifact
+        
       - name: Build and run container
         shell: bash
         run: |
@@ -24,13 +28,13 @@ jobs:
       - name: Getting info out of container and clear containers and images
         shell: bash
         run: |
-          docker cp TaskCont:/task/info.txt .
+          docker cp TaskCont:/task/info.txt ./artifact
           docker container prune
           docker image prune
           
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: info.txt
-          path: .
+          name: info
+          path: artifact
           
