@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           docker cp TaskCont:/task/info.txt .
-          docker containre prune
+          docker container prune
           docker image prune
           
       - name: Upload artifact
