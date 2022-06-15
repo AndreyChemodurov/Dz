@@ -2,7 +2,7 @@ name: DockerTask_DebianInfo
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     
 jobs:
   
